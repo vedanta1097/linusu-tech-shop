@@ -62,7 +62,7 @@ export class OrdersComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result: {data: Order, index: number}) => {
       if (result.data) {
         this.orders.push(result.data);
       }

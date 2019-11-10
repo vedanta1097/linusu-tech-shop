@@ -66,7 +66,7 @@ export class OrderDialogComponent implements OnInit {
     this.orderForm = this.fb.group({
       totalPrice: [0],
       customerName: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       items: this.fb.array([this.initItemFormArray()])
     });
   }
@@ -89,6 +89,7 @@ export class OrderDialogComponent implements OnInit {
 
   removeItem(index: number) {
     this.items.removeAt(index);
+    this.itemList.splice(index, 1);
   }
 
   categoryChanged(index: number) {
@@ -125,7 +126,9 @@ export class OrderDialogComponent implements OnInit {
   onSubmit() {
     this.orderData = this.orderForm.getRawValue();
 
-    const totalPrice = 0;
+    let totalPrice = 0;
+    this.orderData.items.forEach(item => totalPrice += item.price);
+    this.orderData.totalPrice = totalPrice;
 
     this.dialogRef.close({
       data: this.orderData,
