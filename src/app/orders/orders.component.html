@@ -1,0 +1,39 @@
+<div class="container">
+  <h1 class="mat-display-2 main-title">Linusu Tech Shop</h1>
+  <h3 class="mat-h3 test-description">
+    Welcome to the best tech shop in town! 
+    You can buy any PC part you want as long as you have money.
+    But remember kids, don't drop your PC part!
+  </h3>
+
+  <button mat-raised-button color="primary" (click)="addPlaylist()">
+    <mat-icon>add_shopping_cart</mat-icon> Add New Order
+  </button>
+  <mat-divider class="divider"></mat-divider>
+
+  <div  class="order-card">
+    <mat-card>
+      <mat-card-title>$532</mat-card-title>
+      <mat-card-subtitle>
+        By Kim Jong Un &#183; kimjung@gmail.com
+      </mat-card-subtitle>
+
+      <mat-divider></mat-divider>
+
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item  >
+            <mat-icon mat-list-icon>loyalty</mat-icon>
+            <h4 mat-line>CPU</h4>
+            <p mat-line>AMD Ryzen 5 2600 &#183; $117</p>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-button color="warn" (click)="deletePlaylist(i)">DELETE</button>
+        <button mat-button (click)="editPlaylist(playlist, i)">EDIT</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
