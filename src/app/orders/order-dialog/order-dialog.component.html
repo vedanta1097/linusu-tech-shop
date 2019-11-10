@@ -35,8 +35,15 @@
       >
         <div class="col-sm-3">
           <mat-form-field class="full-width">
-            <mat-select formControlName="category">
-              <mat-option *ngFor="let category of categories" [value]="category">
+            <mat-select
+              formControlName="category"
+              placeholder="Select category"
+              required
+            >
+              <mat-option
+                *ngFor="let category of categories"
+                [value]="category"
+              >
                 {{ category }}
               </mat-option>
             </mat-select>
@@ -45,25 +52,36 @@
 
         <div class="col-sm-3">
           <mat-form-field class="full-width">
-            <input
-              matInput
-              placeholder="Artist"
-              formControlName="artist"
+            <mat-select
+              formControlName="name"
+              placeholder="Select item"
+              [disabled]="!items.get(i.toString()).get('category').value"
               required
-            />
+            >
+              <mat-option
+                *ngFor="
+                  let item of getItemList(
+                    items.get(i.toString()).get('category').value
+                  )
+                "
+                [value]="item?.name"
+              >
+                {{ item?.name }}
+              </mat-option>
+            </mat-select>
           </mat-form-field>
         </div>
 
         <div class="col-sm-2">
           <mat-form-field class="full-width">
+            <span matPrefix>$ &nbsp;</span>
             <input
               type="number"
               matInput
-              placeholder="Duration"
-              formControlName="duration"
-              required
+              formControlName="price"
+              [value]="items.get(i.toString()).get('price').value"
+              readonly
             />
-            <span matSuffix>minutes</span>
           </mat-form-field>
         </div>
 
@@ -94,7 +112,7 @@
   <button
     mat-flat-button
     color="primary"
-    [disabled]="!playlistForm.valid"
+    [disabled]="!orderForm.valid"
     (click)="onSubmit()"
     cdkFocusInitial
   >

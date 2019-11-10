@@ -13,6 +13,9 @@ import { MaterialModule } from './material/material.module';
     CommonModule,
     OrdersRoutingModule,
     MaterialModule
+  ],
+  entryComponents: [
+    OrderDialogComponent
   ]
 })
 export class OrdersModule { }

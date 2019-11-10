@@ -88,6 +88,19 @@ export class OrderDialogComponent implements OnInit {
     this.items.removeAt(index);
   }
 
+  getItemList(category: string) {
+    switch (category) {
+      case 'CPU':
+        return this.cpuList;
+      case 'Motherboard':
+        return this.motherBoardList;
+      case 'Video Card':
+        return this.videoCardList;
+      case 'Memory':
+        return this.memoryList;
+    }
+  }
+
   onSubmit() {
     this.orderData = this.orderForm.getRawValue();
 
