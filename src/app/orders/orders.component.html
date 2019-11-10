@@ -3,7 +3,7 @@
   <h3 class="mat-h3 test-description">
     Welcome to the best tech shop in town! 
     You can buy any PC part you want as long as you have money.
-    But remember kids, don't drop your PC part!
+    But remember kids, don't drop your PC component!
   </h3>
 
   <button mat-raised-button color="primary" (click)="addPlaylist()">
@@ -11,21 +11,21 @@
   </button>
   <mat-divider class="divider"></mat-divider>
 
-  <div  class="order-card">
+  <div *ngFor="let order of orders" class="order-card">
     <mat-card>
-      <mat-card-title>$532</mat-card-title>
+      <mat-card-title>${{order?.totalPrice}}</mat-card-title>
       <mat-card-subtitle>
-        By Kim Jong Un &#183; kimjung@gmail.com
+        By {{order?.buyer}} &#183; {{order?.email}}
       </mat-card-subtitle>
 
       <mat-divider></mat-divider>
 
       <mat-card-content>
         <mat-list>
-          <mat-list-item  >
+          <mat-list-item *ngFor="let item of order?.items">
             <mat-icon mat-list-icon>loyalty</mat-icon>
-            <h4 mat-line>CPU</h4>
-            <p mat-line>AMD Ryzen 5 2600 &#183; $117</p>
+            <h4 mat-line>{{item?.category}}</h4>
+            <p mat-line>{{item?.name}} &#183; ${{item?.price}}</p>
           </mat-list-item>
         </mat-list>
       </mat-card-content>
