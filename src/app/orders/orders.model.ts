@@ -1,6 +1,6 @@
 export interface Order {
   totalPrice: number;
-  buyer: string;
+  customerName: string;
   email: string;
   items: Item[];
 }

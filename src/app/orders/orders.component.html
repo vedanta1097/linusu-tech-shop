@@ -6,7 +6,7 @@
     But remember kids, don't drop your PC component!
   </h3>
 
-  <button mat-raised-button color="primary" (click)="addPlaylist()">
+  <button mat-raised-button color="primary" (click)="addOrder()">
     <mat-icon>add_shopping_cart</mat-icon> Add New Order
   </button>
   <mat-divider class="divider"></mat-divider>
@@ -15,7 +15,7 @@
     <mat-card>
       <mat-card-title>${{order?.totalPrice}}</mat-card-title>
       <mat-card-subtitle>
-        By {{order?.buyer}} &#183; {{order?.email}}
+        By {{order?.customerName}} &#183; {{order?.email}}
       </mat-card-subtitle>
 
       <mat-divider></mat-divider>
@@ -31,8 +31,8 @@
       </mat-card-content>
 
       <mat-card-actions>
-        <button mat-button color="warn" (click)="deletePlaylist(i)">DELETE</button>
-        <button mat-button (click)="editPlaylist(playlist, i)">EDIT</button>
+        <button mat-button color="warn" (click)="deleteOrder(i)">DELETE</button>
+        <button mat-button (click)="editOrder(order, i)">EDIT</button>
       </mat-card-actions>
     </mat-card>
   </div>

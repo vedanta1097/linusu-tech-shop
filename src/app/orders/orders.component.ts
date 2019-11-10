@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Order } from './orders.model';
+import { MatDialog } from '@angular/material/dialog';
+import { OrderDialogComponent } from './order-dialog/order-dialog.component';
 
 @Component({
   selector: 'app-orders',
@@ -11,7 +13,7 @@ export class OrdersComponent implements OnInit {
   orders: Order[] = [
     {
       totalPrice: 246,
-      buyer: 'PewDiePie',
+      customerName: 'PewDiePie',
       email: 'PewDiePie@gmail.com',
       items: [
         {
@@ -28,7 +30,7 @@ export class OrdersComponent implements OnInit {
     },
     {
       totalPrice: 306,
-      buyer: 'Filthy Frank',
+      customerName: 'Filthy Frank',
       email: 'georgemiller@gmail.com',
       items: [
         {
@@ -45,9 +47,47 @@ export class OrdersComponent implements OnInit {
     },
   ];
 
-  constructor() { }
+  constructor(
+    public dialog: MatDialog
+  ) { }
 
   ngOnInit() {
+  }
+
+  addOrder() {
+    const dialogRef = this.dialog.open(OrderDialogComponent, {
+      width: '900px',
+      data: {
+        operation: 'create'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result.data) {
+        this.orders.push(result.data);
+      }
+    });
+  }
+
+  editOrder(order: Order, index: number) {
+    const dialogRef = this.dialog.open(OrderDialogComponent, {
+      width: '900px',
+      data: {
+        operation: 'edit',
+        orderData: order,
+        position: index
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((result: {data: Order, index: number}) => {
+      if (result.data) {
+        this.orders[result.index] = result.data;
+      }
+    });
+  }
+
+  deleteOrder(i: number) {
+    this.orders.splice(i, 1);
   }
 
 }

@@ -1,1 +1,103 @@
-<p>order-dialog works!</p>
+<h1 mat-dialog-title>Create New Playlist</h1>
+<div mat-dialog-content>
+  <form [formGroup]="orderForm">
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input
+            matInput
+            placeholder="Customer name"
+            formControlName="customerName"
+            required
+          />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input
+            matInput
+            placeholder="Email"
+            formControlName="email"
+            required
+          />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <ng-container formArrayName="items">
+      <div
+        class="row"
+        *ngFor="let item of items.controls; let i = index"
+        [formGroupName]="i"
+      >
+        <div class="col-sm-3">
+          <mat-form-field class="full-width">
+            <mat-select formControlName="category">
+              <mat-option *ngFor="let category of categories" [value]="category">
+                {{ category }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col-sm-3">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              placeholder="Artist"
+              formControlName="artist"
+              required
+            />
+          </mat-form-field>
+        </div>
+
+        <div class="col-sm-2">
+          <mat-form-field class="full-width">
+            <input
+              type="number"
+              matInput
+              placeholder="Duration"
+              formControlName="duration"
+              required
+            />
+            <span matSuffix>minutes</span>
+          </mat-form-field>
+        </div>
+
+        <div class="col-sm-2 action-btn">
+          <button
+            mat-icon-button
+            color="primary"
+            *ngIf="i === items.controls.length - 1"
+            (click)="additem()"
+          >
+            <mat-icon>add_circle</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            color="warn"
+            *ngIf="items.controls.length > 1"
+            (click)="removeitem(i)"
+          >
+            <mat-icon>remove_circle</mat-icon>
+          </button>
+        </div>
+      </div>
+    </ng-container>
+  </form>
+</div>
+<div mat-dialog-actions class="dialog-action-button">
+  <button mat-flat-button color="warn" (click)="onCancel()">CANCEL</button>
+  <button
+    mat-flat-button
+    color="primary"
+    [disabled]="!playlistForm.valid"
+    (click)="onSubmit()"
+    cdkFocusInitial
+  >
+    SUBMIT
+  </button>
+</div>
