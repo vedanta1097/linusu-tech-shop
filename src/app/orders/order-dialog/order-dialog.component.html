@@ -88,7 +88,7 @@
             mat-icon-button
             color="primary"
             *ngIf="i === items.controls.length - 1"
-            (click)="additem()"
+            (click)="addItem()"
           >
             <mat-icon>add_circle</mat-icon>
           </button>
@@ -96,7 +96,7 @@
             mat-icon-button
             color="warn"
             *ngIf="items.controls.length > 1"
-            (click)="removeitem(i)"
+            (click)="removeItem(i)"
           >
             <mat-icon>remove_circle</mat-icon>
           </button>

@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Order, Item } from '../orders.model';
+import { MatSelectChange } from '@angular/material/select';
 
 @Component({
   selector: 'app-order-dialog',
@@ -100,7 +101,7 @@ export class OrderDialogComponent implements OnInit {
     selectedItem.get('price').setValue(0);
   }
 
-  setItemPrice(index: string, itemName: any) {
+  setItemPrice(index: string, itemName: MatSelectChange) {
     this.itemList[+index].forEach(item => {
       if (itemName.value === item.name) {
         this.items.get(index).get('price').setValue(item.price);
