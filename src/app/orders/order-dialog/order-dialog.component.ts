@@ -38,7 +38,8 @@ export class OrderDialogComponent implements OnInit {
 
   orderData: Order;
   orderForm: FormGroup;
-  itemList = [];
+  // array that has value of array cpuList, motherboardList, etc.
+  itemList: Item[][] = [];
 
   constructor(
     public dialogRef: MatDialogRef<OrderDialogComponent>,
@@ -51,6 +52,7 @@ export class OrderDialogComponent implements OnInit {
 
     if (this.data.operation === 'edit') {
       this.data.orderData.items.forEach((item, index) => {
+        this.itemList.push(this.getItemList(item.category));
         if (index > 0) {
           this.addItem();
         }
@@ -86,6 +88,24 @@ export class OrderDialogComponent implements OnInit {
 
   removeItem(index: number) {
     this.items.removeAt(index);
+  }
+
+  categoryChanged(index: number) {
+    const selectedItem = this.items.get(index.toString());
+
+    const category = selectedItem.get('category').value;
+    this.itemList[index] = this.getItemList(category);
+
+    selectedItem.get('name').setValue('');
+    selectedItem.get('price').setValue(0);
+  }
+
+  setItemPrice(index: string, itemName: any) {
+    this.itemList[+index].forEach(item => {
+      if (itemName.value === item.name) {
+        this.items.get(index).get('price').setValue(item.price);
+      }
+    });
   }
 
   getItemList(category: string) {
